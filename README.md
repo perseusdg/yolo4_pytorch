@@ -202,10 +202,25 @@ Until now, still a small piece of post-processing including NMS is required. We 
 
 
 # 5. ONNX2TensorRT
+A. Download the TensorRT zip file from NVIDIA: 
+[TensorRT-8.6.1.6 for Windows 10](https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/secure/8.6.1/zip/TensorRT-8.6.1.6.Windows10.x86_64.cuda-11.8.zip)
 
-- **TensorRT version Recommended: 7.0, 7.1**
+B. Extract the contents of the zip file
 
-## 5.1 Convert from ONNX of static Batch size
+C. Open a anaconda/python prompt and change the directory to the TensorRT folder:
+   ```sh
+   cd C:\DarkFusion\UltraDarkFusion\TensorRT-8.6.1.6
+  
+
+4.Install the required TensorRT wheels using pip. Make sure to install them in the following order:
+  ```aql
+  pip install python\tensorrt-8.6.1-cp38-none-win_amd64.whl
+  pip install graphsurgeon\graphsurgeon-0.4.6-py2.py3-none-any.whl
+  pip install uff\uff-0.6.9-py2.py3-none-any.whl
+  pip install onnx_graphsurgeon\onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
+  pip install protobuf==3.20.3
+  ```
+D. `copy the files from tensorrt-8.6.1.6\lib folder to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
 
 - **Run the following command to convert YOLOv4 ONNX model into TensorRT engine**
 
@@ -281,7 +296,7 @@ python demo_trt.py <tensorRT_engine_file> <input_image> <input_H> <input_W>
   
   3. Write the deepstream config file for the TRT Engine.
   
-  
+
    
 Reference:
 - https://github.com/eriklindernoren/PyTorch-YOLOv3
