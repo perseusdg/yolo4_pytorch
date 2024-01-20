@@ -218,7 +218,6 @@ C. Open a anaconda/python prompt and change the directory to the TensorRT folder
   pip install graphsurgeon\graphsurgeon-0.4.6-py2.py3-none-any.whl
   pip install uff\uff-0.6.9-py2.py3-none-any.whl
   pip install onnx_graphsurgeon\onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
-  pip install protobuf==3.20.3
   ```
 D. `copy the files from tensorrt-8.6.1.6\lib folder to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
 
