@@ -152,13 +152,13 @@ Until now, still a small piece of post-processing including NMS is required. We 
 - **Install onnxruntime**
 
     ```sh
-    pip install onnxruntime
+    pip install onnxruntime-gpu
     ```
 
 - **Run python script to generate ONNX model and run the demo**
 
     ```sh
-    python demo_darknet2onnx.py <cfgFile> <namesFile> <weightFile> <imageFile> <batchSize>
+    python demo_darknet2onnx.py cfg/yolov4-tiny.cfg data/coco.names yolov4-tiny.weights data/giraffe.jpg 1
     ```
 
 ## 3.1 Dynamic or static batch size
@@ -220,11 +220,12 @@ C. Open a anaconda/python prompt and change the directory to the TensorRT folder
   pip install onnx_graphsurgeon\onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
   ```
 D. `copy the files from tensorrt-8.6.1.6\lib folder to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
+E. Cd bin to access trt .exe
 
 - **Run the following command to convert YOLOv4 ONNX model into TensorRT engine**
 
     ```sh
-    trtexec --onnx=<onnx_file> --explicitBatch --saveEngine=<tensorRT_engine_file> --workspace=<size_in_megabytes> --fp16
+    trtexec --onnx=yolov4_1_3_416_416_static.onnx --saveEngine=yolov4tiny.engine --workspace=2048 --fp16 --explicitBatch
     ```
     - Note: If you want to use int8 mode in conversion, extra int8 calibration is needed.
 
