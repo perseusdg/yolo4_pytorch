@@ -1,12 +1,8 @@
-import sys
 import os
 import time
 import math
 import numpy as np
-
-import itertools
-import struct  # get_image_size
-import imghdr  # get_image_size
+import cv2 
 
 
 def sigmoid(x):
@@ -97,7 +93,6 @@ def nms_cpu(boxes, confs, nms_thresh=0.5, min_mode=False):
 
 
 def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
-    import cv2
     img = np.copy(img)
     colors = np.array([[1, 0, 1], [0, 0, 1], [0, 1, 1], [0, 1, 0], [1, 1, 0], [1, 0, 0]], dtype=np.float32)
 
@@ -105,45 +100,38 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
         ratio = float(x) / max_val * 5
         i = int(math.floor(ratio))
         j = int(math.ceil(ratio))
-        ratio = ratio - i
+        ratio -= i
         r = (1 - ratio) * colors[i][c] + ratio * colors[j][c]
         return int(r * 255)
 
-    width = img.shape[1]
-    height = img.shape[0]
-    for i in range(len(boxes)):
-        box = boxes[i]
-        x1 = int(box[0] * width)
-        y1 = int(box[1] * height)
-        x2 = int(box[2] * width)
-        y2 = int(box[3] * height)
-        bbox_thick = int(0.6 * (height + width) / 600)
-        if color:
-            rgb = color
-        else:
-            rgb = (255, 0, 0)
+    width, height = img.shape[1], img.shape[0]
+    bbox_thick = int(0.6 * (height + width) / 600)
+
+    for box in boxes:
+        x1, y1 = int(box[0] * width), int(box[1] * height)
+        x2, y2 = int(box[2] * width), int(box[3] * height)
+        rgb = color if color else (255, 0, 0)
+
         if len(box) >= 7 and class_names:
-            cls_conf = box[5]
-            cls_id = box[6]
+            cls_conf, cls_id = box[5], box[6]
             print('%s: %f' % (class_names[cls_id], cls_conf))
-            classes = len(class_names)
-            offset = cls_id * 123457 % classes
-            red = get_color(2, offset, classes)
-            green = get_color(1, offset, classes)
-            blue = get_color(0, offset, classes)
-            if color is None:
-                rgb = (red, green, blue)
-            msg = str(class_names[cls_id])+" "+str(round(cls_conf,3))
-            t_size = cv2.getTextSize(msg, 0, 0.7, thickness=bbox_thick // 2)[0]
-            c1, c2 = (x1,y1), (x2, y2)
-            c3 = (c1[0] + t_size[0], c1[1] - t_size[1] - 3)
-            cv2.rectangle(img, (x1,y1), (np.float32(c3[0]), np.float32(c3[1])), rgb, -1)
-            img = cv2.putText(img, msg, (c1[0], np.float32(c1[1] - 2)), cv2.FONT_HERSHEY_SIMPLEX,0.7, (0,0,0), bbox_thick//2,lineType=cv2.LINE_AA)
-        
-        img = cv2.rectangle(img, (x1, y1), (x2, y2), rgb, bbox_thick)
+            offset = cls_id * 123457 % len(class_names)
+            red, green, blue = get_color(2, offset, len(class_names)), get_color(1, offset, len(class_names)), get_color(0, offset, len(class_names))
+            rgb = (red, green, blue) if color is None else rgb
+
+            msg = f"{class_names[cls_id]} {round(cls_conf, 3)}"
+            t_size = cv2.getTextSize(msg, cv2.FONT_HERSHEY_SIMPLEX, 0.7, thickness=bbox_thick // 2)[0]
+            c3 = (x1 + t_size[0], y1 - t_size[1] - 3)
+
+            cv2.rectangle(img, (x1, y1), (c3[0], c3[1]), rgb, -1)
+            cv2.putText(img, msg, (x1, y1 - 2), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 0, 0), bbox_thick // 2, lineType=cv2.LINE_AA)
+
+        cv2.rectangle(img, (x1, y1), (x2, y2), rgb, bbox_thick)
+
     if savename:
         print("save plot results to %s" % savename)
         cv2.imwrite(savename, img)
+
     return img
 
 
