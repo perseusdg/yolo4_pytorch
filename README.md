@@ -195,8 +195,7 @@ Compatible with your CUDA version. [PyTorch Previous Versions](https://pytorch.o
 
 - **Pytorch version Recommended:**
 
-    - Pytorch 1.4.0 for TensorRT 7.0 and higher
-    - Pytorch 1.5.0 and 1.6.0 for TensorRT 7.1.2 and higher
+
 
 - **Run python script to generate ONNX model and run the demo**
 
@@ -224,9 +223,9 @@ A. Download the TensorRT zip file from NVIDIA:
 B. Extract the contents of the zip file
 
 C. Open a anaconda/python prompt and change the directory to the TensorRT folder:
-   ```sh
+   `
    cd C:\TensorRT-8.6.1.6
-  
+  `
 
 4.Install the required TensorRT wheels using pip. Make sure to install them in the following order:
   ```sh
