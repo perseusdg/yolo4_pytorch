@@ -178,11 +178,13 @@ Compatible with your CUDA version. [PyTorch Previous Versions](https://pytorch.o
 - **This script is to convert the official pretrained darknet model into ONNX**
 
 - **Run python script to generate ONNX model and run the demo**
+ # To display the image with detections
+     python demo_darknet2onnx.py cfg/yolov4-tiny.cfg data/coco.names yolov4-tiny.weights data/dog.jpg 1
+  
+# To save image with prediction
+    python demo_darknet2onnx.py cfg/yolov4-tiny.cfg data/coco.names yolov4-tiny.weights data/dog.jpg 1 predictions_onnx.jpg
 
-    ```sh
-    python demo_darknet2onnx.py cfg/yolov4-tiny.cfg data/coco.names yolov4-tiny.weights data/giraffe.jpg 1
-    ```
-
+    
 ## 3.1 Dynamic or static batch size
 
 - **Positive batch size will generate ONNX model of static batch size, otherwise, batch size will be dynamic**
