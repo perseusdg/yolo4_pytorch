@@ -225,11 +225,11 @@ B. Extract the contents of the zip file
 
 C. Open a anaconda/python prompt and change the directory to the TensorRT folder:
    ```sh
-   cd C:\DarkFusion\UltraDarkFusion\TensorRT-8.6.1.6
+   cd C:\TensorRT-8.6.1.6
   
 
 4.Install the required TensorRT wheels using pip. Make sure to install them in the following order:
-  ```aql
+  ```sh
   pip install python\tensorrt-8.6.1-cp38-none-win_amd64.whl
   pip install graphsurgeon\graphsurgeon-0.4.6-py2.py3-none-any.whl
   pip install uff\uff-0.6.9-py2.py3-none-any.whl
