@@ -1,3 +1,4 @@
+
 # Pytorch-YOLOv4
 
 ![](https://img.shields.io/static/v1?label=python&message=3.6|3.7&color=blue)
@@ -139,21 +140,42 @@ There are 2 inference outputs.
 
 Until now, still a small piece of post-processing including NMS is required. We are trying to minimize time and complexity of post-processing.
 
+Installation Guide
+==================
+
+Follow these steps to set up and use the YOLOv4 model with PyTorch.
+
+Requirements
+------------
+
+Ensure these prerequisites are installed:
+
+*   **Anaconda**:
+    *   [Download here](https://www.anaconda.com/download/)
+*   **CUDA Toolkit**:
+    *   [Download here](https://developer.nvidia.com/cuda-toolkit)
+*   **cuDNN**:
+    *   [Download here](https://developer.nvidia.com/cudnn) #you will have to create an account if you do not have nvidia log in. its quick easy and free.
+
+Setting Up the Environment
+--------------------------
+
+1.  **Create and Activate a New Conda Environment**:
+
+```sh
+cd C:\
+conda create -n onnx python=3.8 -y
+conda activate onnx -y 
+git clone https://github.com/lordofkillz/yolo4_pytorch.git
+cd C:\pytorch-YOLOv4
+pip install -r requirements.txt
+```
+**Install PyTorch**:
+Compatible with your CUDA version. [PyTorch Previous Versions](https://pytorch.org/get-started/previous-versions/#linux-and-windows-6).
 
 # 3. Darknet2ONNX
 
 - **This script is to convert the official pretrained darknet model into ONNX**
-
-- **Pytorch version Recommended:**
-
-    - Pytorch 1.4.0 for TensorRT 7.0 and higher
-    - Pytorch 1.5.0 and 1.6.0 for TensorRT 7.1.2 and higher
-
-- **Install onnxruntime**
-
-    ```sh
-    pip install onnxruntime-gpu
-    ```
 
 - **Run python script to generate ONNX model and run the demo**
 
@@ -175,12 +197,6 @@ Until now, still a small piece of post-processing including NMS is required. We 
 
     - Pytorch 1.4.0 for TensorRT 7.0 and higher
     - Pytorch 1.5.0 and 1.6.0 for TensorRT 7.1.2 and higher
-
-- **Install onnxruntime**
-
-    ```sh
-    pip install onnxruntime
-    ```
 
 - **Run python script to generate ONNX model and run the demo**
 
