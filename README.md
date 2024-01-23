@@ -216,16 +216,23 @@ Compatible with your CUDA version. [PyTorch Previous Versions](https://pytorch.o
     - Static batch size will generate 2 ONNX models, one is for running the demo (batch_size=1)
 
 
-# 5. ONNX2TensorRT
-A. Download the TensorRT zip file from NVIDIA: 
-[TensorRT-8.6.1.6 for Windows 10](https://developer.nvidia.com/downloads/compute/machine-learning/tensorrt/secure/8.6.1/zip/TensorRT-8.6.1.6.Windows10.x86_64.cuda-11.8.zip)
+5. ONNX to TensorRT Conversion
+===============================
 
-B. Extract the contents of the zip file
+Follow these steps to convert ONNX models to TensorRT.
 
-C. Open a anaconda/python prompt and change the directory to the TensorRT folder:
-   `
-   cd C:\TensorRT-8.6.1.6
-  `
+### A. Download TensorRT
+
+1.  **Download the TensorRT zip file from NVIDIA**:
+[Download here](https://developer.nvidia.com/tensorrt)
+
+### B. Extract the Zip File
+
+2.  **Extract the contents** of the downloaded zip file.
+
+### C. Set Up the TensorRT Environment
+
+3.  **Open an Anaconda or Python prompt** and change the directory to the extracted TensorRT folder:
 
 4.Install the required TensorRT wheels using pip. Make sure to install them in the following order:
   ```sh
@@ -235,7 +242,7 @@ C. Open a anaconda/python prompt and change the directory to the TensorRT folder
   pip install onnx_graphsurgeon\onnx_graphsurgeon-0.3.12-py2.py3-none-any.whl
   ```
 D. `copy the files from tensorrt-8.6.1.6\lib folder to C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.8\bin`
-E. Cd bin to access trt .exe
+E. `Cd C:\ .exe
 
 - **Run the following command to convert YOLOv4 ONNX model into TensorRT engine**
 
