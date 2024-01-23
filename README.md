@@ -127,7 +127,8 @@ Ensure these prerequisites are installed:
 1.  Create and activate a new Conda environment:
     ```
     cd C:\
-    conda create -n onnx python=3.8 conda activate onnx  
+    conda create -n onnx python=3.8
+    conda activate onnx  
     git clone https://github.com/lordofkillz/yolo4_pytorch.git 
     cd pytorch-YOLOv4
     pip install -r requirements.txt
