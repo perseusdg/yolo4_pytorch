@@ -92,6 +92,7 @@ def nms_cpu(boxes, confs, nms_thresh=0.5, min_mode=False):
 
 
 
+
 def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
     img = np.copy(img)
     colors = np.array([[1, 0, 1], [0, 0, 1], [0, 1, 1], [0, 1, 0], [1, 1, 0], [1, 0, 0]], dtype=np.float32)
@@ -114,12 +115,13 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
 
         if len(box) >= 7 and class_names:
             cls_conf, cls_id = box[5], box[6]
-            print('%s: %f' % (class_names[cls_id], cls_conf))
+            cls_conf = cls_conf * 100  # Convert to percentage
+            print(f"{class_names[cls_id]}: {cls_conf:.0f}%")  # Print with no decimal places
             offset = cls_id * 123457 % len(class_names)
             red, green, blue = get_color(2, offset, len(class_names)), get_color(1, offset, len(class_names)), get_color(0, offset, len(class_names))
-            rgb = (red, green, blue) if color is None else rgb
+            rgb = (red, green, blue) if color is None else color
 
-            msg = f"{class_names[cls_id]} {round(cls_conf, 3)}"
+            msg = f"{class_names[cls_id]} {cls_conf:.0f}%"  # Message with no decimal places
             t_size = cv2.getTextSize(msg, cv2.FONT_HERSHEY_SIMPLEX, 0.7, thickness=bbox_thick // 2)[0]
             c3 = (x1 + t_size[0], y1 - t_size[1] - 3)
 
@@ -131,6 +133,11 @@ def plot_boxes_cv2(img, boxes, savename=None, class_names=None, color=None):
     if savename:
         print("save plot results to %s" % savename)
         cv2.imwrite(savename, img)
+    else:
+        # If no save path provided, display the image
+        cv2.imshow('Detections', img)
+        cv2.waitKey(0)  # Wait indefinitely until a key is pressed
+        cv2.destroyAllWindows()
 
     return img
 
@@ -225,3 +232,4 @@ def post_processing(img, conf_thresh, nms_thresh, output):
     print('-----------------------------------')
     
     return bboxes_batch
+
