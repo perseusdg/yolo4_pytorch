@@ -5,7 +5,7 @@
 ![PyTorch Version](https://img.shields.io/static/v1?label=pytorch&message=1.4|2.0&color=green)
 [![License: Apache 2.0](https://img.shields.io/static/v1?label=license&message=Apache2&color=green)](./License.txt)
 
-A minimal PyTorch implementation of YOLOv4, based on the paper [YOLOv4](https://arxiv.org/abs/2004.10934) and the source code provided by [AlexeyAB's Darknet](https://github.com/AlexeyAB/darknet). For more details, visit [YOLO's website](http://pjreddie.com/darknet/yolo/).
+A minimal PyTorch implementation of YOLOv4, based on the paper [YOLOv4](https://arxiv.org/abs/2004.10934) and the source code provided by [Hank ai Darknet](https://github.com/hank-ai/darknet). 
 
 Features:
 - Inference
@@ -73,7 +73,7 @@ Inference
 
 ### Performance on MS COCO dataset
 
-Using pretrained Darknet weights from [AlexeyAB/darknet](https://github.com/AlexeyAB/darknet).
+Using pretrained Darknet weights from [https://github.com/hank-ai/darknet).
 
 #### val2017 dataset (input size: 416x416)
 
