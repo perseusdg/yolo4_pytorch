@@ -235,7 +235,7 @@ python demo_trt.py yolov4tiny.engine data/dog.jpg 416 416
 
 **To save the image with detections**
 ```
-python demo_trt.py yolov4tiny.engine data/dog.jpg 416 416               predictions_trt.jpg
+python demo_trt.py yolov4tiny.engine data/dog.jpg 416 416 predictions_trt.jpg
 ```
 
 - This demo here only works when batchSize is dynamic (1 should be within dynamic range) or batchSize=1, but you can update this demo a little for other dynamic or static batch sizes.
