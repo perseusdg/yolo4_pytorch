@@ -117,7 +117,7 @@ def do_inference(context, bindings, inputs, outputs, stream):
 
 TRT_LOGGER = trt.Logger()
 
-def main(engine_path, image_path, image_size):
+def main(engine_path, image_path, image_size, save_path=None):
     with get_engine(engine_path) as engine, engine.create_execution_context() as context:
         buffers = allocate_buffers(engine, 1)
         IN_IMAGE_H, IN_IMAGE_W = image_size
@@ -139,7 +139,7 @@ def main(engine_path, image_path, image_size):
             namesfile = 'data/names'
 
         class_names = load_class_names(namesfile)
-        plot_boxes_cv2(image_src, boxes[0], savename='predictions_trt.jpg', class_names=class_names)
+        plot_boxes_cv2(image_src, boxes[0], savename=save_path, class_names=class_names)
 
 
 def get_engine(engine_path):
@@ -150,7 +150,7 @@ def get_engine(engine_path):
 
 
 
-def detect(context, buffers, image_src, image_size, num_classes):
+def detect(context, buffers, image_src, image_size, num_classes, save_path=None):
     IN_IMAGE_H, IN_IMAGE_W = image_size
 
     ta = time.time()
@@ -187,15 +187,18 @@ def detect(context, buffers, image_src, image_size, num_classes):
 
 
 
+# Update the if __name__ == '__main__' block to parse the command line arguments
 if __name__ == '__main__':
     engine_path = sys.argv[1]
     image_path = sys.argv[2]
-    
+
     if len(sys.argv) < 4:
         image_size = (416, 416)
     elif len(sys.argv) < 5:
         image_size = (int(sys.argv[3]), int(sys.argv[3]))
     else:
         image_size = (int(sys.argv[3]), int(sys.argv[4]))
-    
-    main(engine_path, image_path, image_size)
+
+    save_path = None if len(sys.argv) < 6 else sys.argv[5]  # Save path is the 6th argument
+    main(engine_path, image_path, image_size, save_path)
+
